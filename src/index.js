@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-//wrap the entire application by context provider so that we can access value anywhere in our project without any props drellings
+//컨텍스트 프로바이더를 사용해 필요한 데이터들을 모든 app이하 컴포넌트에 사용
+//props 드릴링 방지
 import { ContextProvider } from "./store/ContextApi";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
