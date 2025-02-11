@@ -19,7 +19,7 @@ const Login = () => {
   const [step, setStep] = useState(1);
   const [jwtToken, setJwtToken] = useState("");
   const [loading, setLoading] = useState(false);
-  // Access the token and setToken function using the useMyContext hook from the ContextProvider
+  //컨텍스트 패스에서 토큰을 가지고 온다.
   const { setToken, token } = useMyContext();
   const navigate = useNavigate();
 
@@ -46,10 +46,10 @@ const Login = () => {
     localStorage.setItem("JWT_TOKEN", token);
     localStorage.setItem("USER", JSON.stringify(user));
 
-    //store the token on the context state  so that it can be shared any where in our application by context provider
+    // 로컬 스토리지에 토큰 저장
     setToken(token);
 
-    navigate("/notes");
+    navigate("/notes"); //노트 페이지로 이동
   };
 
   //function for handle login with credentials
@@ -59,27 +59,26 @@ const Login = () => {
       const response = await api.post("/auth/public/signin", data);
 
       //showing success message with react hot toast
-      toast.success("Login Successful");
+      toast.success("로그인 성공");
 
-      //reset the input field by using reset() function provided by react hook form after submission
+      //입력 창 리셋
       reset();
 
       if (response.status === 200 && response.data.jwtToken) {
         setJwtToken(response.data.jwtToken);
         const decodedToken = jwtDecode(response.data.jwtToken);
+        console.log(decodedToken); //토큰 복호화
         if (decodedToken.is2faEnabled) {
           setStep(2); // Move to 2FA verification step
         } else {
           handleSuccessfulLogin(response.data.jwtToken, decodedToken);
         }
       } else {
-        toast.error(
-          "Login failed. Please check your credentials and try again."
-        );
+        toast.error("로그인 실패! 유저네임과 패스워드 확인 필요합니다.");
       }
     } catch (error) {
       if (error) {
-        toast.error("Invalid credentials");
+        toast.error("에러 발생");
       }
     } finally {
       setLoading(false);
@@ -112,7 +111,7 @@ const Login = () => {
     }
   };
 
-  //if there is token  exist navigate  the user to the home page if he tried to access the login page
+  // 토큰이 있다면 로그인 생략 후 홈페이지로 간다
   useEffect(() => {
     if (token) navigate("/");
   }, [navigate, token]);
