@@ -12,6 +12,7 @@ const NoteItems = ({ parsedContent, id, createdAt }) => {
     <div className="sm:px-5 px-2 py-5 shadow-md bg-noteColor shadow-white rounded-lg min-h-96 max-h-96 relative overflow-hidden ">
       <p
         className="text-black font-customWeight ql-editor"
+        //html은 DB저장시 그냥 저장하면 해킹 위험 있음
         dangerouslySetInnerHTML={{ __html: truncateText(parsedContent) }}
       ></p>
       <div className="flex justify-between items-center  absolute bottom-5 sm:px-5 px-2 left-0 w-full text-slate-700">

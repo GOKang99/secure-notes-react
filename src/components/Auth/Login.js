@@ -74,11 +74,11 @@ const Login = () => {
           handleSuccessfulLogin(response.data.jwtToken, decodedToken);
         }
       } else {
-        toast.error("로그인 실패! 유저네임과 패스워드 확인 필요합니다.");
+        toast.error("에러발생.");
       }
     } catch (error) {
       if (error) {
-        toast.error("에러 발생");
+        toast.error("로그인 실패! 유저네임과 패스워드 확인 필요합니다");
       }
     } finally {
       setLoading(false);

@@ -8,6 +8,7 @@ import Buttons from "../../utils/Buttons";
 import toast from "react-hot-toast";
 import Errors from "../Errors";
 
+//
 const UserDetails = () => {
   const {
     register,
@@ -104,7 +105,7 @@ const UserDetails = () => {
   const handleSavePassword = async (data) => {
     setPasswordLoader(true);
     const newPassword = data.password;
-
+    console.log(newPassword);
     try {
       const formData = new URLSearchParams();
       formData.append("userId", userId);
@@ -118,9 +119,9 @@ const UserDetails = () => {
       setIsEditingPassword(false);
       setValue("password", "");
       //fetchUserDetails();
-      toast.success("password update success");
+      toast.success("패스워드 변경 성공");
     } catch (err) {
-      toast.error("Error updating password " + err.response.data);
+      toast.error("패스워드 업데이트 에러 " + err.response.data);
     } finally {
       setPasswordLoader(false);
     }
@@ -190,7 +191,7 @@ const UserDetails = () => {
           <div className="lg:w-[70%] sm:w-[90%] w-full  mx-auto shadow-lg shadow-gray-300 p-8 rounded-md">
             <div>
               <h1 className="text-slate-800 text-2xl font-bold  pb-4">
-                Profile Information
+                유저 프로파일
                 <hr />
               </h1>
               <form
@@ -198,7 +199,7 @@ const UserDetails = () => {
                 onSubmit={handleSubmit(handleSavePassword)}
               >
                 <InputField
-                  label="UserName"
+                  label="유저 이름"
                   required
                   id="username"
                   className="w-full"
@@ -210,7 +211,7 @@ const UserDetails = () => {
                   readOnly
                 />
                 <InputField
-                  label="Email"
+                  label="이메일"
                   required
                   id="email"
                   className="flex-1"
@@ -222,7 +223,7 @@ const UserDetails = () => {
                   readOnly
                 />
                 <InputField
-                  label="Password"
+                  label="패스워드"
                   required
                   autoFocus={isEditingPassword}
                   id="password"
@@ -243,7 +244,7 @@ const UserDetails = () => {
                     }
                     className="bg-customRed mb-0 w-fit px-4 py-2 rounded-md text-white"
                   >
-                    Click To Edit Password
+                    비밀번호 재설정
                   </Buttons>
                 ) : (
                   <div className="flex items-center gap-2 ">
@@ -251,7 +252,7 @@ const UserDetails = () => {
                       type="submit"
                       className="bg-btnColor mb-0 w-fit px-4 py-2 rounded-md text-white"
                     >
-                      {passwordLoader ? "Loading.." : "Save"}
+                      {passwordLoader ? "Loading.." : "저장"}
                     </Buttons>
                     <Buttons
                       type="button"
@@ -260,7 +261,7 @@ const UserDetails = () => {
                       }
                       className="bg-customRed mb-0 w-fit px-4 py-2 rounded-md text-white"
                     >
-                      Cancel
+                      취소
                     </Buttons>
                   </div>
                 )}

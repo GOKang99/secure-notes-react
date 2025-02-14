@@ -9,8 +9,9 @@ import { Link } from "react-router-dom";
 import { MdOutlineEmail } from "react-icons/md";
 import { MdDateRange } from "react-icons/md";
 
-//Material ui data grid has used for the table
-//initialize the columns for the tables and (field) value is used to show data in a specific column dynamically
+//테이블은 DataGrid를 사용하여 userListsColums은 제목열 표시
+//rows는 데이터 표시
+
 export const userListsColumns = [
   {
     field: "username",
@@ -22,7 +23,7 @@ export const userListsColumns = [
     editable: false,
     headerClassName: "text-black font-semibold border",
     cellClassName: "text-slate-700 font-normal  border",
-    renderHeader: (params) => <span className="text-center">UserName</span>,
+    renderHeader: (params) => <span className="text-center">유저네임</span>,
   },
 
   {
@@ -36,7 +37,7 @@ export const userListsColumns = [
     cellClassName: "text-slate-700 font-normal  border  text-center ",
     align: "center",
     disableColumnMenu: true,
-    renderHeader: (params) => <span>Email</span>,
+    renderHeader: (params) => <span>이메일</span>,
     renderCell: (params) => {
       return (
         <div className=" flex  items-center justify-center  gap-1 ">
@@ -58,7 +59,7 @@ export const userListsColumns = [
     cellClassName: "text-slate-700 font-normal  border  ",
     align: "center",
     disableColumnMenu: true,
-    renderHeader: (params) => <span>Created At</span>,
+    renderHeader: (params) => <span>만든 시각</span>,
     renderCell: (params) => {
       return (
         <div className=" flex justify-center  items-center  gap-1 ">
@@ -80,7 +81,7 @@ export const userListsColumns = [
     disableColumnMenu: true,
     headerClassName: "text-black font-semibold border ",
     cellClassName: "text-slate-700 font-normal  border  ",
-    renderHeader: (params) => <span className="ps-10">Status</span>,
+    renderHeader: (params) => <span className="ps-10">상태</span>,
   },
   {
     field: "action",
@@ -132,9 +133,7 @@ const UserList = () => {
   }, []);
 
   const rows = users.map((item) => {
-    const formattedDate = moment(item.createdDate).format(
-      "MMMM DD, YYYY, hh:mm A"
-    );
+    const formattedDate = moment(item.createdDate).format("YYYY-MM-DD hh:mm A");
 
     //set the data for each rows in the table according to the field name in columns
     //Example: username is the keyword in row it should matche with the field name in column so that the data will show on that column dynamically

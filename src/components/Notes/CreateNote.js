@@ -9,18 +9,19 @@ import toast from "react-hot-toast";
 
 const CreateNote = () => {
   const navigate = useNavigate();
-  //set the content of the reactquill
+  //리액트 퀄 라이브러리 사용
   const [editorContent, setEditorContent] = useState("");
   const [loading, setLoading] = useState(false);
-
+  console.log(editorContent);
+  //에디터의 내용이 바뀌면 그 내용을 에디터컨텐트에 저장함.
   const handleChange = (content, delta, source, editor) => {
     setEditorContent(content);
   };
 
-  //note create handler
+  //제출버튼을 누르면 에디터 내용을 서버로 보내 저장함.
   const handleSubmit = async () => {
     if (editorContent.trim().length === 0) {
-      return toast.error("Note content is required");
+      return toast.error("내용을 적어주세요");
     }
     try {
       setLoading(true);
@@ -64,6 +65,7 @@ const CreateNote = () => {
                 { indent: "-1" },
                 { indent: "+1" },
               ],
+              [{ color: [] }, { background: [] }],
               ["clean"],
             ],
           }}
